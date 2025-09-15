@@ -16,16 +16,11 @@ public class Assignments {
     //x=4568
     //результат: 14
     public int sumLastNums(int x) {
-        int digitCount = (int) (Math.log10(x) + 1);
-        if (digitCount <= 1) {
-            System.out.println("Разрядность числа должна быть больше двух.");
-            return x;
-        } else {
-            int lastDigit = x % 10;
-            int updatedNumber = x / 10;
+            int lastDigit = Math.abs(x) % 10;
+            int updatedNumber = Math.abs(x) / 10;
             int secondToLastDigit = updatedNumber % 10;
             return (lastDigit + secondToLastDigit);
-        }
+
     }
 
     // Задача 4
@@ -159,7 +154,10 @@ public class Assignments {
     //x=8 y=-1 z=4
     //результат: false
     public boolean sum3(int x, int y, int z) {
-        return ((x + y == z) || (x + z == y) || (y + z == x));
+        if ((x + y == z) || (x + z == y) || (y + z == x)) {
+            return true;
+        }
+        return false;
     }
 
     // Задача 8
@@ -284,16 +282,17 @@ public class Assignments {
     public int pow(int x, int y) {
         if (y == 0) {
             return 1;
+        } else {
+            int result = 1;
+            for (int i = 1; i <= y; i++) {
+                result *= x;
+            }
+            return result;
         }
-        int result = 1;
-        for (int i = 1; i <= y; i++) {
-            result *= x;
-        }
-        return result;
-
     }
 
     // Задача 6
+
     // Одинаковость.
     //Дана сигнатура метода: public bool equalNum (int x);
     //Необходимо реализовать метод таким образом, чтобы он возвращал true, если
@@ -371,30 +370,40 @@ public class Assignments {
     Scanner keyboard = new Scanner(System.in);
     public void guessGame() {
         int randomNumber = random.nextInt(0, 10);
-        System.out.print("Введите число от 0 до 9: ");
-        int userGuess = keyboard.nextInt();
-        if ( userGuess < 0 || userGuess > 9) {
-            System.out.println("Вы ввели неверное значение.");
-        } else {
-            int tries = 1;
-            while (userGuess != randomNumber) {
-                System.out.print("Вы не угадали. Введите число от 0 до 9: ");
-                userGuess = keyboard.nextInt();
+        int userGuess;
+        while (true) {
+            System.out.print("Введите цифру от 0 до 9: ");
+            String line = keyboard.next().trim();
+            try {
+                userGuess = Integer.parseInt(line);
+                System.out.println();
                 if (userGuess < 0 || userGuess > 9) {
                     System.out.println("Вы ввели неверное значение.");
-                    break;
+                    continue;
                 }
-                tries++;
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка. Введено неверное число.");
             }
-            if (userGuess == randomNumber) {
-                System.out.println("Вы угадали!");
-                if (tries % 10 == 1) {
-                    System.out.println("Вы отгадали число за " + tries + " попытку");
-                } else if ((tries % 10 == 2) || (tries % 10 == 3) || (tries % 10 == 4)) {
-                    System.out.println("Вы отгадали число за " + tries + " попытки");
-                } else {
-                    System.out.println("Вы отгадали число за " + tries + " попыток");
-                }
+        }
+        int tries = 1;
+        while (userGuess != randomNumber) {
+            System.out.print("Вы не угадали. Введите цифру от 0 до 9: ");
+            userGuess = keyboard.nextInt();
+            if (userGuess < 0 || userGuess > 9) {
+                System.out.println("Вы ввели неверное значение.");
+                continue;
+            }
+            tries++;
+        }
+        if (userGuess == randomNumber) {
+            System.out.println("Вы угадали!");
+            if (tries % 10 == 1) {
+                System.out.println("Вы отгадали число за " + tries + " попытку");
+            } else if ((tries % 10 == 2) || (tries % 10 == 3) || (tries % 10 == 4)) {
+                System.out.println("Вы отгадали число за " + tries + " попытки");
+            } else {
+                System.out.println("Вы отгадали число за " + tries + " попыток");
             }
         }
     }
