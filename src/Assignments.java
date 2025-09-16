@@ -65,8 +65,8 @@ public class Assignments {
     //a=2 b=15
     //результат: false
     public boolean isDivisor(int a, int b) {
-        if (a == 0 || b == 0) {
-            return false;
+        if (a==0 || b == 0) {
+            return true;
         }
         return ((a % b == 0) || (b % a == 0));
     }
@@ -185,7 +185,7 @@ public class Assignments {
     public String age(int x) {
         if (x % 10 == 1 && x != 11) {
             return "год";
-        } else if (((x % 10 == 2) || (x % 10 == 3) || (x % 10 == 4)) && ((x != 12) && (x != 13) && (x != 14))) {
+        } else if (((x % 10 == 2) || (x % 10 == 3) || (x % 10 == 4)) && ((x != 12) && (x != 13) && (x != 14)) && (x!=112) && (x!=113) && (x!=114) ) {
             return "года";
         } else {
             return "лет";
@@ -308,11 +308,12 @@ public class Assignments {
     //результат: false
     public boolean equalNum (int x)  {
         x = Math.abs(x);
+        int secondToLastDigit;
         int lastDigit = x%10;
         x = x/10;
         while (x>0) {
-            int secondToLastDigit = x%10;
-            if (lastDigit != secondToLastDigit){
+            secondToLastDigit = x%10;
+            if (lastDigit != secondToLastDigit) {
                 return false;
             }
             x = x/10;
@@ -462,9 +463,10 @@ public class Assignments {
     //результат: arr=[5,4,3,2,1]
     public void reverse (int[] arr )  {
         int firstIndex = 0;
+        int temporary;
         int lastIndex = arr.length - 1;
         while (firstIndex < lastIndex) {
-            int temporary = arr[firstIndex];
+            temporary = arr[firstIndex];
             arr[firstIndex] = arr[lastIndex];
             arr[lastIndex] = temporary;
 

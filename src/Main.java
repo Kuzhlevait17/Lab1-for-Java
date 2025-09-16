@@ -30,7 +30,7 @@ public class Main {
                     System.out.println();
                     break;
                 } catch (NumberFormatException e) {
-                    System.out.println("Ошибка. Введено неверное исло.");
+                    System.out.println("Ошибка. Введено неверное число.");
                 }
             }
             switch (department) {
